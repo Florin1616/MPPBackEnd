@@ -1,14 +1,20 @@
-package com.example.backend.Model;
+package com.example.backend.Model;//package com.example.backend.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int age;
     private String occupation;
     private String address;
     private String photo;
-    public Person() {
-    }
 
     public Person(int id, String name, int age, String occupation, String address, String photo) {
         this.id = id;
@@ -19,6 +25,9 @@ public class Person {
         this.photo = photo;
     }
 
+    public Person() {
+    }
+
     public Person(String name, int age, String occupation, String address, String photo) {
         this.name = name;
         this.age = age;
@@ -26,6 +35,7 @@ public class Person {
         this.address = address;
         this.photo = photo;
     }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -61,6 +71,7 @@ public class Person {
     public String getPhoto() {
         return photo;
     }
+
     public void setName(String name) {
         this.name = name;
     }

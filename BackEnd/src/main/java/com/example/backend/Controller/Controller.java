@@ -3,6 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.Model.Person;
 import com.example.backend.Service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,22 +22,35 @@ public class Controller {
     }
 
     @GetMapping("/{id}")
-    public Person getEntity(@PathVariable int id) {
-        return personService.getPerson(id);
+    public ResponseEntity<Person> getEntity(@PathVariable int id) {
+        return personService.getPerson(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public void createEntity(@RequestBody Person newEntity) {
-        personService.addPerson(newEntity);
+    public Person createEntity(@RequestBody Person newEntity) {
+        return personService.addPerson(newEntity);
     }
 
     @PutMapping("/{id}")
-    public void updateEntity(@PathVariable int id, @RequestBody Person updatedEntity) {
-        personService.updatePerson(id, updatedEntity);
+    public ResponseEntity<Person> updateEntity(@PathVariable int id, @RequestBody Person updatedEntity) {
+        return personService.getPerson(id)
+                .map(person -> {
+                    person.setName(updatedEntity.getName());
+                    person.setAge(updatedEntity.getAge());
+                    person.setOccupation(updatedEntity.getOccupation());
+                    person.setAddress(updatedEntity.getAddress());
+                    person.setPhoto(updatedEntity.getPhoto());
+                    return ResponseEntity.ok(personService.addPerson(person));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEntity(@PathVariable int id) {
-        personService.deletePerson(id);
+    public ResponseEntity<Void> deleteEntity(@PathVariable int id) {
+        personService.getPerson(id)
+                .ifPresent(person -> personService.deletePerson(id));
+        return ResponseEntity.noContent().build();
     }
 }
