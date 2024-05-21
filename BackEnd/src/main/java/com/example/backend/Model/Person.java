@@ -1,11 +1,12 @@
 package com.example.backend.Model;//package com.example.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.List;
 
 @Entity
+@Table(name = "person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +16,10 @@ public class Person {
     private String occupation;
     private String address;
     private String photo;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Property> properties;
 
     public Person(int id, String name, int age, String occupation, String address, String photo) {
         this.id = id;
@@ -95,4 +100,12 @@ public class Person {
     public void setId(int id) {
         this.id = id;
     }
+    public List<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
+    }
+
 }

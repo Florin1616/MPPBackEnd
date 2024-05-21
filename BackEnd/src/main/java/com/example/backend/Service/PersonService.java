@@ -14,13 +14,14 @@ import net.datafaker.Faker;
 @Service
 public class PersonService {
     private final PersonRepository personRepository;
-    private final SimpMessagingTemplate messagingTemplate;
+//    private final SimpMessagingTemplate messagingTemplate;
     private final Faker faker = new Faker();
+//    public PersonService(PersonRepository personRepository, SimpMessagingTemplate messagingTemplate) {
 
 //    @Autowired
-    public PersonService(PersonRepository personRepository, SimpMessagingTemplate messagingTemplate) {
+    public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.messagingTemplate = messagingTemplate;
+//        this.messagingTemplate = messagingTemplate;
     }
 
     public List<Person> getAllPersons() {
@@ -33,7 +34,7 @@ public class PersonService {
 
     public Person addPerson(Person person) {
         Person savedPerson = personRepository.save(person);
-        messagingTemplate.convertAndSend("/topic/newPerson", savedPerson);
+//        messagingTemplate.convertAndSend("/topic/newPerson", savedPerson);
         return savedPerson;
     }
 
