@@ -15,11 +15,13 @@ public class Controller {
 
     @Autowired
     private PersonService personService;
+    @CrossOrigin(origins = "http://localhost:3000")
 
     @GetMapping
     public List<Person> getAllEntities() {
         return personService.getAllPersons();
     }
+    @CrossOrigin(origins = "http://localhost:3000")
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> getEntity(@PathVariable int id) {
@@ -28,10 +30,14 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public Person createEntity(@RequestBody Person newEntity) {
         return personService.addPerson(newEntity);
     }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
 
     @PutMapping("/{id}")
     public ResponseEntity<Person> updateEntity(@PathVariable int id, @RequestBody Person updatedEntity) {
@@ -46,6 +52,7 @@ public class Controller {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+    @CrossOrigin(origins = "http://localhost:3000")
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEntity(@PathVariable int id) {

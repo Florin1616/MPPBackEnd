@@ -42,30 +42,30 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
-    public void generatePersons(int number) {
-        for (int i = 0; i < number; i++) {
-            String name = faker.name().fullName();
-            int age = faker.number().numberBetween(18, 60);
-            String occupation = faker.company().profession();
-            String address = faker.address().fullAddress();
-            String photo = faker.avatar().image();
-            Person person = new Person(name, age, occupation, address, photo);
-            addPerson(person);
-        }
-    }
+//    public void generatePersons(int number) {
+//        for (int i = 0; i < number; i++) {
+//            String name = faker.name().fullName();
+//            int age = faker.number().numberBetween(18, 60);
+//            String occupation = faker.company().profession();
+//            String address = faker.address().fullAddress();
+//            String photo = faker.avatar().image();
+//            Person person = new Person(name, age, occupation, address, photo);
+//            addPerson(person);
+//        }
+//    }
 
-    @Scheduled(fixedRate = 8000)
-    public void generateAndSendPerson() {
-        Person person = generatePerson();
-        addPerson(person);
-    }
+//    @Scheduled(fixedRate = 8000)
+//    public void generateAndSendPerson() {
+//        Person person = generatePerson();
+//        addPerson(person);
+//    }
 
-    private Person generatePerson() {
-        String name = faker.name().fullName();
-        int age = faker.number().numberBetween(18, 60);
-        String occupation = faker.company().profession();
-        String address = faker.address().fullAddress();
-        String photo = faker.avatar().image();
-        return new Person(name, age, occupation, address, photo);
-    }
+//    private Person generatePerson() {
+//        String name = faker.name().fullName();
+//        int age = faker.number().numberBetween(18, 60);
+//        String occupation = faker.company().profession();
+//        String address = faker.address().fullAddress();
+//        String photo = faker.avatar().image();
+//        return new Person(name, age, occupation, address, photo);
+//    }
 }
