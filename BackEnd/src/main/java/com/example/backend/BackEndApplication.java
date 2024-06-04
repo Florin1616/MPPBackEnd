@@ -14,7 +14,7 @@ import java.util.List;
 
 @SpringBootApplication
 //@EnableAutoConfiguration
-@ComponentScan({"com.example.backend.Repo", "com.example.backend.Service", "com.example.backend.Controller"})
+@ComponentScan({"com.example.backend.Repo", "com.example.backend.Service", "com.example.backend.Controller","config"})
 public class BackEndApplication {
 
 	public static void main(String[] args) {

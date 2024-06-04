@@ -21,6 +21,15 @@ public class Person {
     @JsonManagedReference
     private List<Property> properties;
 
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Person(int id, String name, int age, String occupation, String address, String photo) {
         this.id = id;
         this.name = name;
@@ -84,6 +93,8 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+
+
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
