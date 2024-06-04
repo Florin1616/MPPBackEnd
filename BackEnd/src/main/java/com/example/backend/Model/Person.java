@@ -26,8 +26,8 @@ public class Person {
 //    private User user;
 
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Person(int id, String name, int age, String occupation, String address, String photo) {

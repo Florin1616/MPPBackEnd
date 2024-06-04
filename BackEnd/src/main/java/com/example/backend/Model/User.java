@@ -11,9 +11,7 @@ public class User {
     private String username;
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
+
 
     public Long getId() {
         return id;
